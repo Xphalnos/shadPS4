@@ -1,0 +1,64 @@
+# Documentation - https://github.com/actions/labeler
+
+# General Labels
+Workflows:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.github/workflows/**'
+CMake:
+- all:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'cmake/*'
+      - 'CMakeLists.txt'
+      - '**/CMakeLists.txt'
+    - all-globs-to-all-files:
+      - '!external/**'
+Document:
+- all:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '*.md'
+      - 'documents/**'
+      - '**/*.md'
+    - all-globs-to-all-files:
+      - '!external/**'
+Externals:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'externals/**'
+
+# shadPS4 Labels
+Core:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'src/core/**'
+    - all-globs-to-all-files:
+      - '!src/core/libraries/**'
+Audio:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'src/audio_core/*'
+      - 'src/core/libraries/audio/*'
+libraries:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'src/core/libraries/**'
+PAD:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'src/input/*'
+Texture:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'src/video_core/texture_cache/*'
+Vulkan:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'src/video_core/renderer_vulkan/*'
+
+# GUI Label
+GUI:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'src/qt_gui/*'
