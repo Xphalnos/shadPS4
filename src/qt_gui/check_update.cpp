@@ -251,7 +251,7 @@ void CheckUpdate::setupUI(const QString& downloadUrl, const QString& latestDate,
     connect(noButton, &QPushButton::clicked, this, [this]() { close(); });
 
     autoUpdateCheckBox->setChecked(Config::autoUpdate());
-    connect(autoUpdateCheckBox, &QCheckBox::checkStateChanged, this, [](int state) {
+    connect(autoUpdateCheckBox, checkStateChanged(), this, [](int state) {
         const auto user_dir = Common::FS::GetUserPath(Common::FS::PathType::UserDir);
         Config::setAutoUpdate(state == Qt::Checked);
         Config::save(user_dir / "config.toml");

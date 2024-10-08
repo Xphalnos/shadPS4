@@ -127,13 +127,13 @@ SettingsDialog::SettingsDialog(std::span<const QString> physical_devices, QWidge
                     }
                 });
 
-        connect(ui->fullscreenCheckBox, &QCheckBox::checkStateChanged, this,
+        connect(ui->fullscreenCheckBox, &checkStateChanged(), this,
                 [](int val) { Config::setFullscreenMode(val); });
 
-        connect(ui->showSplashCheckBox, &QCheckBox::checkStateChanged, this,
+        connect(ui->showSplashCheckBox, &checkStateChanged(), this,
                 [](int val) { Config::setShowSplash(val); });
 
-        connect(ui->ps4proCheckBox, &QCheckBox::checkStateChange, this,
+        connect(ui->ps4proCheckBox, &checkStateChanged(), this,
                 [](int val) { Config::setNeoMode(val); });
 
         connect(ui->logTypeComboBox, &QComboBox::currentTextChanged, this,
@@ -142,7 +142,7 @@ SettingsDialog::SettingsDialog(std::span<const QString> physical_devices, QWidge
         connect(ui->logFilterLineEdit, &QLineEdit::textChanged, this,
                 [](const QString& text) { Config::setLogFilter(text.toStdString()); });
 
-        connect(ui->updateCheckBox, &QCheckBox::checkStateChanged, this,
+        connect(ui->updateCheckBox, &checkStateChanged(), this,
                 [](int state) { Config::setAutoUpdate(state == Qt::Checked); });
 
         connect(ui->updateComboBox, &QComboBox::currentTextChanged, this,
@@ -153,7 +153,7 @@ SettingsDialog::SettingsDialog(std::span<const QString> physical_devices, QWidge
             checkUpdate->exec();
         });
 
-        connect(ui->playBGMCheckBox, &QCheckBox::checkStateChanged, this, [](int val) {
+        connect(ui->playBGMCheckBox, &checkStateChanged(), this, [](int val) {
             Config::setPlayBGM(val);
             if (val == Qt::Unchecked) {
                 BackgroundMusicPlayer::getInstance().stopMusic();
@@ -165,7 +165,7 @@ SettingsDialog::SettingsDialog(std::span<const QString> physical_devices, QWidge
             BackgroundMusicPlayer::getInstance().setVolume(val);
         });
 
-        connect(ui->discordRPCCheckbox, &QCheckBox::checkStateChanged, this, [](int val) {
+        connect(ui->discordRPCCheckbox, &checkStateChanged(), this, [](int val) {
             Config::setEnableDiscordRPC(val);
             auto* rpc = Common::Singleton<DiscordRPCHandler::RPC>::Instance();
             if (val == Qt::Checked) {
@@ -213,25 +213,25 @@ SettingsDialog::SettingsDialog(std::span<const QString> physical_devices, QWidge
         connect(ui->vblankSpinBox, &QSpinBox::valueChanged, this,
                 [](int val) { Config::setVblankDiv(val); });
 
-        connect(ui->dumpShadersCheckBox, &QCheckBox::checkStateChanged, this,
+        connect(ui->dumpShadersCheckBox, &checkStateChanged(), this,
                 [](int val) { Config::setDumpShaders(val); });
 
-        connect(ui->nullGpuCheckBox, &QCheckBox::checkStateChanged, this,
+        connect(ui->nullGpuCheckBox, &checkStateChanged(), this,
                 [](int val) { Config::setNullGpu(val); });
     }
 
     // DEBUG TAB
     {
-        connect(ui->debugDump, &QCheckBox::checkStateChanged, this,
+        connect(ui->debugDump, &checkStateChanged(), this,
                 [](int val) { Config::setDebugDump(val); });
 
-        connect(ui->vkValidationCheckBox, &QCheckBox::checkStateChanged, this,
+        connect(ui->vkValidationCheckBox, &checkStateChanged(), this,
                 [](int val) { Config::setVkValidation(val); });
 
-        connect(ui->vkSyncValidationCheckBox, &QCheckBox::checkStateChanged, this,
+        connect(ui->vkSyncValidationCheckBox, &checkStateChanged(), this,
                 [](int val) { Config::setVkSyncValidation(val); });
 
-        connect(ui->rdocCheckBox, &QCheckBox::checkStateChanged, this,
+        connect(ui->rdocCheckBox, &checkStateChanged(), this,
                 [](int val) { Config::setRdocEnabled(val); });
     }
 
