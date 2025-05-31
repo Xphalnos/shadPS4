@@ -76,20 +76,15 @@ jobs:
             ${{ env.cache-name }}-
 
     - name: Cache CMake Build
-      uses: hendrikmuhs/ccache-action@v1.2.17
+      uses: hendrikmuhs/ccache-action@v1.2.18
       env:
           cache-name: ${{ runner.os }}-sdl-cache-cmake-build
       with:
         append-timestamp: false
         key: ${{ env.cache-name }}-${{ hashFiles('**/CMakeLists.txt', 'cmake/**') }}
 
-    - name: Setup VS Environment
-      uses: ilammy/msvc-dev-cmd@v1.13.0
-      with:
-        arch: amd64
-
     - name: Configure CMake
-      run: cmake --fresh -G Ninja -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=clang-cl -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+      run: cmake -G Ninja -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=clang-cl -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $env:NUMBER_OF_PROCESSORS
@@ -130,20 +125,15 @@ jobs:
             ${{ env.cache-name }}-
 
     - name: Cache CMake Build
-      uses: hendrikmuhs/ccache-action@v1.2.17
+      uses: hendrikmuhs/ccache-action@v1.2.18
       env:
           cache-name: ${{ runner.os }}-qt-cache-cmake-build
       with:
         append-timestamp: false
         key: ${{ env.cache-name }}-${{ hashFiles('**/CMakeLists.txt', 'cmake/**') }}
 
-    - name: Setup VS Environment
-      uses: ilammy/msvc-dev-cmd@v1.13.0
-      with:
-        arch: amd64
-
     - name: Configure CMake
-      run: cmake --fresh -G Ninja -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DENABLE_QT_GUI=ON -DENABLE_UPDATER=ON -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=clang-cl -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+      run: cmake -G Ninja -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DENABLE_QT_GUI=ON -DENABLE_UPDATER=ON -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=clang-cl -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $env:NUMBER_OF_PROCESSORS
@@ -186,7 +176,7 @@ jobs:
             ${{ env.cache-name }}- 
 
     - name: Cache CMake Build
-      uses: hendrikmuhs/ccache-action@v1.2.17
+      uses: hendrikmuhs/ccache-action@v1.2.18
       env:
           cache-name: ${{runner.os}}-sdl-cache-cmake-build
       with:
@@ -196,7 +186,7 @@ jobs:
         variant: sccache
 
     - name: Configure CMake
-      run: cmake --fresh -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(sysctl -n hw.ncpu)
@@ -247,7 +237,7 @@ jobs:
             ${{ env.cache-name }}- 
 
     - name: Cache CMake Build
-      uses: hendrikmuhs/ccache-action@v1.2.17
+      uses: hendrikmuhs/ccache-action@v1.2.18
       env:
           cache-name: ${{runner.os}}-qt-cache-cmake-build
       with:
@@ -257,7 +247,7 @@ jobs:
         variant: sccache
 
     - name: Configure CMake
-      run: cmake --fresh -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DENABLE_QT_GUI=ON -DENABLE_UPDATER=ON -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_OSX_ARCHITECTURES=x86_64 -DENABLE_QT_GUI=ON -DENABLE_UPDATER=ON -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(sysctl -n hw.ncpu)
@@ -301,7 +291,7 @@ jobs:
             ${{ env.cache-name }}- 
 
     - name: Cache CMake Build
-      uses: hendrikmuhs/ccache-action@v1.2.17
+      uses: hendrikmuhs/ccache-action@v1.2.18
       env:
           cache-name: ${{ runner.os }}-sdl-cache-cmake-build
       with:
@@ -309,7 +299,7 @@ jobs:
         key: ${{ env.cache-name }}-${{ hashFiles('**/CMakeLists.txt', 'cmake/**') }}
 
     - name: Configure CMake
-      run: cmake --fresh -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=clang-19 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_SHARED_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=clang-19 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_SHARED_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
@@ -362,7 +352,7 @@ jobs:
             ${{ env.cache-name }}- 
 
     - name: Cache CMake Build
-      uses: hendrikmuhs/ccache-action@v1.2.17
+      uses: hendrikmuhs/ccache-action@v1.2.18
       env:
           cache-name: ${{ runner.os }}-qt-cache-cmake-build
       with:
@@ -370,7 +360,7 @@ jobs:
         key: ${{ env.cache-name }}-${{ hashFiles('**/CMakeLists.txt', 'cmake/**') }}
 
     - name: Configure CMake
-      run: cmake --fresh -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=clang-19 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_SHARED_LINKER_FLAGS="-fuse-ld=mold" -DENABLE_QT_GUI=ON -DENABLE_UPDATER=ON -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=clang-19 -DCMAKE_CXX_COMPILER=clang++-19 -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_SHARED_LINKER_FLAGS="-fuse-ld=mold" -DENABLE_QT_GUI=ON -DENABLE_UPDATER=ON -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
@@ -409,7 +399,7 @@ jobs:
             ${{ env.cache-name }}- 
 
     - name: Cache CMake Build
-      uses: hendrikmuhs/ccache-action@v1.2.17
+      uses: hendrikmuhs/ccache-action@v1.2.18
       env:
           cache-name: ${{ runner.os }}-sdl-gcc-cache-cmake-build
       with:
@@ -417,7 +407,7 @@ jobs:
         key: ${{ env.cache-name }}-${{ hashFiles('**/CMakeLists.txt', 'cmake/**') }}
 
     - name: Configure CMake
-      run: cmake --fresh -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=gcc-14 -DCMAKE_CXX_COMPILER=g++-14 -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_SHARED_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=gcc-14 -DCMAKE_CXX_COMPILER=g++-14 -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_SHARED_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
@@ -445,7 +435,7 @@ jobs:
             ${{ env.cache-name }}- 
 
     - name: Cache CMake Build
-      uses: hendrikmuhs/ccache-action@v1.2.17
+      uses: hendrikmuhs/ccache-action@v1.2.18
       env:
           cache-name: ${{ runner.os }}-qt-gcc-cache-cmake-build
       with:
@@ -453,7 +443,7 @@ jobs:
         key: ${{ env.cache-name }}-${{ hashFiles('**/CMakeLists.txt', 'cmake/**') }}
 
     - name: Configure CMake
-      run: cmake --fresh -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=gcc-14 -DCMAKE_CXX_COMPILER=g++-14 -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_SHARED_LINKER_FLAGS="-fuse-ld=mold" -DENABLE_QT_GUI=ON -DENABLE_UPDATER=ON -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE=ON -DCMAKE_C_COMPILER=gcc-14 -DCMAKE_CXX_COMPILER=g++-14 -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=mold" -DCMAKE_SHARED_LINKER_FLAGS="-fuse-ld=mold" -DENABLE_QT_GUI=ON -DENABLE_UPDATER=ON -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --parallel $(nproc)
